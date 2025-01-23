@@ -1,0 +1,10 @@
+{
+  "suites": 1,
+  "tests": 8,
+  "passes": 8,
+  "pending": 0,
+  "failures": 0,
+  "start": "2025-01-08T08:33:43.927Z",
+  "duration": 44654,
+  "file": "cypress\\e2e\\games\\nexto-funcionalities\\login.cy.js"
+}

@@ -1,0 +1,10 @@
+{
+  "suites": 1,
+  "tests": 10,
+  "passes": 10,
+  "pending": 0,
+  "failures": 0,
+  "start": "2025-01-08T08:33:43.950Z",
+  "duration": 50058,
+  "file": "cypress\\e2e\\games\\nexto-funcionalities\\registration-1.cy.js"
+}

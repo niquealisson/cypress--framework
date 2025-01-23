@@ -1,0 +1,10 @@
+{
+  "suites": 1,
+  "tests": 82,
+  "passes": 82,
+  "pending": 0,
+  "failures": 0,
+  "start": "2025-01-08T08:34:50.750Z",
+  "duration": 178104,
+  "file": "cypress\\e2e\\games\\nexto-funcionalities\\search.cy.js"
+}
