@@ -9,12 +9,13 @@ describe('Login Page Test', () => {
         });
     });
 
-    it('should allow user to log in with valid credentials', () => {
+    it.only('should allow user to log in with valid credentials', () => {
         const { username, password } = users.validUser;
         LoginPage.visit();
         LoginPage.enterEmail(username);
         LoginPage.enterPassword(password);
         LoginPage.clickLoginButton();
+        LoginPage.clickCloseModal();
         LoginPage.verifyLoginSuccess();
     });
 
