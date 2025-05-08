@@ -1,36 +1,43 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import 'cypress-iframe'; // Import the cypress-iframe plugin
 
-Cypress.on('uncaught:exception', (err, runnable) => {return false})
+// Existing uncaught exception handler
+Cypress.on('uncaught:exception', (err, runnable) => {
+  return false; // Prevent tests from failing on uncaught exceptions
+});
 
+// Custom command to get the body of an iframe
 Cypress.Commands.add('getIframeBody', (iframeSelector) => {
-    return cy
-      .get(iframeSelector) // Get the iframe element
-      .its('0.contentDocument.body') // Get the iframe's document body
-      .should('not.be.empty') // Ensure the iframe is loaded
-      .then(cy.wrap); // Wrap the body so Cypress commands can be chained
-  })
-  
+  return cy
+    .get(iframeSelector) // Get the iframe element
+    .its('0.contentDocument.body') // Get the iframe's document body
+    .should('not.be.empty') // Ensure the iframe is loaded
+    .then(cy.wrap); // Wrap the body so Cypress commands can be chained
+});
+
+// Custom command to interact with an iframe using cypress-iframe
+Cypress.Commands.add('iframe', (iframeSelector) => {
+  return cy.iframe(iframeSelector);
+});
+
+// Custom command to check if an iframe is loaded
+Cypress.Commands.add('frameLoaded', (iframeSelector) => {
+  return cy.frameLoaded(iframeSelector);
+});
+
+// Custom command to set the proxy dynamically
+Cypress.Commands.add('setProxy', (proxyUrl) => {
+  // Modify the Cypress configuration to use the proxy
+  Cypress.config('requestTimeout', 15000); // Optional: Increase request timeout in case the proxy is slow
+
+  // Intercept all network requests and modify them to go through the proxy
+  cy.intercept({
+    url: '**/*', // Match all URLs
+    middleware: true, // Intercept requests and modify them
+  }, (req) => {
+    req.continue((res) => {
+      res.headers['X-Forwarded-For'] = proxyUrl; // Set proxy address
+    });
+  });
+
+  cy.log(`Proxy set to: ${proxyUrl}`);
+});

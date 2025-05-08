@@ -170,10 +170,10 @@ describe('Register Now Page Tests', () => {
           cy.get('input[name="firstName"]').type('John'); // Enter a valid first name
           cy.get('input[name="lastName"]').type('Doe'); // Enter a valid last name
           cy.get('select[name="gender"]').select('Male'); // Select gender
-          cy.get('input[name="dob"]').type('1990-01-01'); // Enter a valid date of birth
+          cy.get('select').eq(5).select('+7').should('have.value', '+7');  // Asserts that the value is now "+7"
           cy.get('input[name="city"]').type('New York'); // Enter a valid city
           cy.get('input[name="houseNumberAndStreetName"]').type('123 Main St'); // Enter a valid address
-          cy.get('select[name="phoneCode"]').select('+1'); // Select valid country code
+          //cy.get('select[name="phoneCode"]').select('+1'); // Select valid country code
           cy.get('input[name="phoneNumber"]').type('1234567890'); // Enter a valid phone number
           cy.get('input[name="accept"]').check(); // Check the accept terms checkbox
       

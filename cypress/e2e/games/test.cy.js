@@ -13,11 +13,11 @@ describe('Search Functionality Tests', () => {
   // 2. Search for a Game by Name
   it('2. should search for a game by name', () => {
      cy.get('button[class="relative w-full"]').click();
-     cy.get('input[placeholder="Search"]').clear().type('Red Panda Poker')
+     cy.get('input[placeholder="Search"]').clear().type('Triple Cash or Crash')
      cy.wait(1000)
      cy.get('.flex.items-stretch.space-x-1.flex-1.sm\\:p-4.overflow-auto') // This is the container for game results
       .find('div.text-color-b.text-sm.md\\:text-base.font-medium.truncate') // Target the game name within each result
-      .should('contain.text', 'Red Panda Poker'); // Check if the game name exists in the results
+      .should('contain.text', 'Triple Cash or Crash'); // Check if the game name exists in the results
          
   });
   
@@ -26,11 +26,11 @@ describe('Search Functionality Tests', () => {
  // 3.: Search with Partial Game Name
   it('3. should search with a partial game name', () => {
      cy.get('button[class="relative w-full"]').click();
-     cy.get('input[placeholder="Search"]').clear().type('Red Pand')
+     cy.get('input[placeholder="Search"]').clear().type('Triple Cas')
      cy.wait(1000)
      cy.get('.flex.items-stretch.space-x-1.flex-1.sm\\:p-4.overflow-auto') // This is the container for game results
       .find('div.text-color-b.text-sm.md\\:text-base.font-medium.truncate') // Target the game name within each result
-      .should('contain.text', 'Red Panda Poker'); // Check if the game name exists in the results
+      .should('contain.text', 'Triple Cash or Crash'); // Check if the game name exists in the results
          
   });
 
@@ -46,36 +46,50 @@ describe('Search Functionality Tests', () => {
     .should('contain.text', 'No games found'); // Assert the "No games found" message is visible
    });
   
-// 5. Provider Checkbox Selection
-  it('5. should filter games by the "1X2" provider', () => {
-   cy.get('button[class="relative w-full"]').click();
-   // Open the provider filter section
-  cy.get('.flex-shrink-0.md\\:w-52').scrollIntoView();
-  cy.contains('div.truncate', '1X2')
-  .parents('label') // Move up to the parent label which contains the checkbox
-  .find('input[type="checkbox"]') // Find the checkbox within the label
-  .check(); // Check the checkbox
-  // Wait for the results to update (you may adjust the wait time depending on the site’s responsiveness)
-  cy.wait(1000);
+   it('should filter games by the "Betsoft" provider', () => {
+    // Ensure the filter section is open
+    cy.get('button[class="relative w-full"]').click();
   
-  // Assert that the game results contain only games related to "1X2"
-  cy.get('.flex.items-stretch.space-x-1.flex-1.sm\\:p-4.overflow-auto')
-  .find('div.mt-2') // This is the container for each game result
-  .each(($game) => {
-  cy.wrap($game)
-  .find('div.text-color-e') // The provider name is in this div
-  .should('contain.text', '1X2'); // Verify that the provider name is "1X2"
-})
-});
+    // Find "Betsoft" text and locate the checkbox correctly
+    cy.contains('div.truncate', 'Betsoft', { timeout: 10000 })
+      .scrollIntoView()
+      .should('be.visible') // Ensure it's visible
+      .parent() // Move up to the parent div
+      .parent() // Move up again (likely reaching <label>)
+      .find('input[type="checkbox"]') // Locate the checkbox inside
+      .check({ force: true }); // Check it (force in case it's hidden)
+ 
+  
+  
+  
+
+
+    //   //.parents('label') // Move up to the parent label which contains the checkbox
+    //   .find('input[type="checkbox"]') // Find the checkbox within the label
+    //   .check(); // Check the checkbox
+    // // Wait for the results to update (you may adjust the wait time depending on the site’s responsiveness)
+    // cy.wait(1000);
+
+    // Assert that the game results contain only games related to "1X2"
+    cy.get('.flex.items-stretch.space-x-1.flex-1.sm\\:p-4.overflow-auto')
+      .find('div.mt-2') // This is the container for each game result
+      .each(($game) => {
+        cy.wrap($game)
+          .find('div.text-color-e') // The provider name is in this div
+          .should('contain.text', 'Betsoft'); // Verify that the provider name is "Betsoft"
+      })
+  });
+
+
 it('6. should filter games by selected providers', () => {
   
   cy.get('button[class="relative w-full"]').click();
   cy.get('.flex-shrink-0.md\\:w-52').scrollIntoView();
-  cy.contains('div.truncate', '1X2')
+  cy.contains('div.truncate', 'Betsoft')
   .parents('label') // Move up to the parent label which contains the checkbox
   .find('input[type="checkbox"]') // Find the checkbox within the label
   .check(); // Check the checkbox
-  cy.contains('div.truncate', 'Apollo')
+  cy.contains('div.truncate', 'Triple Cash or Crash')
   .parents('label') // Move up to the parent label which contains the checkbox
   .find('input[type="checkbox"]') // Find the checkbox within the label
   .check(); // Check the checkbox
@@ -86,7 +100,7 @@ it('6. should filter games by selected providers', () => {
     cy.wrap($game)
       .find('div.text-color-e') // The provider name is in this div
       .invoke('text') // Extract the text content
-      .should('match', /(1X2|Apollo)/); // Verify that the provider name is either "1X2" or "Apollo"
+      .should('match', /(Triple Cash or Crash|Betsoft)/); // Verify that the provider name is either "1X2" or "Apollo"
   
 
   });

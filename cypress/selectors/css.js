@@ -1,4 +1,7 @@
 const nextoSelectors = {
+  
+  urlLogin: 'https://nextocasino.com/?modal=login',
+  urlRegistration: 'https://nextocasino.com/casino/live_casino?modal=register', 
   baseUrl: 'https://nextocasino.com',
   searchButton: 'button[class="relative w-full"]',  // Selector for the search button
   searchInput: 'input[placeholder="Search"]',  // Selector for the search input field
@@ -187,14 +190,14 @@ const nextoSelectors = {
     { name: 'Zillion' },
   ],
 
-  germany_excluded_providers: [
-    { name: 'System' },
-    { name: 'Trustly' },
-    { name: 'Acme payments' },
-    { name: 'Alphapo' },
-    { name: 'Altenar v 2' },
-    { name: 'Aps' },
-    { name: 'Arrows edge' },
+  // germany_excluded_providers: [
+  //   { name: 'System' },
+  //   { name: 'Trustly' },
+  //   { name: 'Acme payments' },
+  //   { name: 'Alphapo' },
+  //   { name: 'Altenar v 2' },
+  //   { name: 'Aps' },
+  //   { name: 'Arrows edge' },
     // { name: 'Astropay' },
     // { name: 'Astroplay' },
     // { name: 'Banks' },
@@ -215,7 +218,7 @@ const nextoSelectors = {
     // { name: 'Dimoco' },
     // { name: 'Directa 24' },
     // { name: 'Eupaymentz' },
-  ],
+  // ],
   
 
 

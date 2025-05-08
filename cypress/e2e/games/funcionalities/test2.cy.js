@@ -1,7 +1,10 @@
+import nextoSelectors from '../../../selectors/css.js';
+
 describe('Login Page', () => {
   
     beforeEach(() => {
-      cy.visit('https://nextocasino.com/?modal=login  '); // Open the login page
+  
+    cy.visit('urlLogin'); // Open the login page
     });
   
     // 1. Positive scenario: successful login with valid credentials and leads to another page
@@ -32,7 +35,7 @@ describe('Login Page', () => {
 
     // 3. Validate error message for incorrect password
     it('3. should display an error for incorrect password', () => {
-        cy.get('input[name="email"]').type(Cypress.env('universal_user_name'));
+        cy.get('input[name="email"]').type('universal_user_name'); // Enter valid email
         cy.get('input[name="password"]').type('Wrongpassword1'); // Enter invalid password
         cy.get('button[type="submit"]').click(); // Click submit button
     

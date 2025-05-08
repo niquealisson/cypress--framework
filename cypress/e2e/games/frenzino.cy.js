@@ -1,6 +1,8 @@
+import nextoSelectors from '../../selectors/css.js';
+
 describe('Register Now Page - Modal 1 Tests', () => {
     beforeEach(() => {
-      cy.visit('https://qa:rpkl3884399dxsrj89sxnxle52u1enu7@frenzino.io/?modal=register'); // Open the registration page
+      cy.visit('baseUrl'); // Open the registration page
     });
   
     // 1. Test: Verify the page loads correctly

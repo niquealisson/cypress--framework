@@ -1,7 +1,9 @@
+//https://royalcoala18.com/v 
+
 describe('Login Page', () => {
   
     beforeEach(() => {
-      cy.visit('https://nextocasino.com/?modal=login  '); // Open the login page
+      cy.visit('https://royalcoala18.com/'); // Open the login page
     });
   
     // 1. Positive scenario: successful login with valid credentials and leads to another page

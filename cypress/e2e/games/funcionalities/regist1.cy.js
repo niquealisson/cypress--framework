@@ -157,20 +157,77 @@ describe('Register Now Page - Modal 1 Tests', () => {
   
       cy.get('div._modal_72swt_1._lg_72swt_20').should('be.visible');
     });
-  });
+ 
+      // 11. Modal closes correctly when close button (X) is clicked
+      it('11. should close the modal when close button (X) is clicked', () => {
+      // Ensure the modal is visible first before interacting with it
+      cy.get('svg.w-8.h-8.text-color-e')
+      .should('be.visible')  // Ensure the close button is visible before clicking
+      .click();  // Click the close button
+
+      // Wait for the modal to disappear after the click
+      cy.get('div._modal_72swt_1._lg_72swt_20', { timeout: 10000 })  // Correct modal class
+      .should('not.exist');  // Ensure the modal no longer exists
+
+    });
+     
+    // 12. should show error for passwords less than 6 characters
+      it('12. should show error for passwords less than 6 characters', () => {
+      cy.get('input[name="email"]').type('test@example.com'); // Enter a valid email
+      cy.get('input[name="password"]').type('abc'); // Password less than 6 characters
+      cy.get('button').contains('Continue').click(); // Click the Continue button
+  
+      // Verify error message
+      cy.get('.text-sm.block.text-color-i.mt-1')
+        .should('contain', 'Password must be at least 6 characters'); // Adjust the selector and message as needed
+    });
+
+      // 13. should show error for passwords without uppercase letters 
+      it('13. should show error for passwords without uppercase letters', () => {
+      cy.get('input[name="email"]').type('test@example.com'); // Enter a valid email
+      cy.get('input[name="password"]').type('password123'); // No uppercase letters
+      cy.get('button').contains('Continue').click(); // Click the Continue button
+  
+      // Verify error message
+      cy.get('.text-sm.block.text-color-i.mt-1')
+        .should('contain', 'Password must have at least 1 uppercase letter');
+    });
+  
+
+    // 14.should show error for passwords without numbers or special characters
+    it('14. should show error for passwords without numbers or special characters', () => {
+      cy.get('input[name="email"]').type('test@example.com'); // Enter a valid email
+      cy.get('input[name="password"]').type('Password'); // No numbers or special characters
+      cy.get('button').contains('Continue').click(); // Click the Continue button
+  
+      // Verify error message
+      cy.get('.text-sm.block.text-color-i.mt-1')
+        .should('contain', 'Password must have at least 1 number or special character (@,!,#, etc).');
+    });
+
+  //   it('should show an error for an invalid or expired promo code', () => {
+  //     cy.visit('https://nextocasino.com/?modal=register'); // Open the registration page
+    
+  //     // Fill out valid fields
+  //     cy.get('input[name="email"]').type('test@example.com'); // Enter a valid email
+  //     cy.get('input[name="password"]').type('ValidPassword1!'); // Enter a valid password
+  //     cy.get('select[name="currency"]').select('USD'); // Select currency
+    
+  //     // Enter an invalid or expired promo code
+  //   cy.get('input[name="bonusCode"]').type('EXPIRED123'); // Enter invalid promo code
+  //   cy.get('button').contains('Continue').click(); // Click Continue
+
+  //  // Verify error message for the promo code
+  //   cy.get('.text-sm.block.text-color-e') // Adjust to the label or error message container
+  //     .should('contain', 'Promo code is invalid or expired'); // Check for appropriate error message
+  //   });
+    
+    
+ 
       
-    
-  // it(' 6. should close the modal when close button (X) is clicked', () => {
-  //   // Ensure the modal is visible first before interacting with it
-  //   cy.get('svg.w-8.h-8.text-color-e')
-  //     .should('be.visible')  // Ensure the close button is visible before clicking
-  //     .click();  // Click the close button
-    
-  //   // Wait for the modal to disappear after the click
-  //   cy.get('div.flex-1.flex.flex-col.w-full.px-6.sm\\:px-12.pb-8.sm\\:justify-between')
-  //     .should('not.be.visible');  // Check that the modal is no longer visible
-  // });
   
+  });
   
+ 
   
   

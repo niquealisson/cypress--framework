@@ -2,7 +2,17 @@ import nextoSelectors from '../../selectors/css.js';
 
 describe('Germany Providers Test', () => {
   beforeEach(() => {
-    cy.setCookie('locale', 'no-NO'); // Set the locale for Norway
+    // Set the locale for Germany
+    cy.setCookie('locale', 'de-DE');
+
+    // Dynamically set the proxy for Germany from the environment variable
+    const germanyProxy = process.env.CYPRESS_PROXY || "http://germany-proxy.com:8080"; // Default to Germany proxy if not set
+
+    if (germanyProxy) {
+      // Set the proxy dynamically for each test
+      cy.setProxy(germanyProxy);
+      cy.log(`Using proxy: ${germanyProxy}`);
+    }
   });
 
   // Test providers that should appear
@@ -26,7 +36,8 @@ describe('Germany Providers Test', () => {
     });
   });
 
-  // // Test providers that should NOT appear
+  // Uncomment this block if you want to test excluded providers as well
+  // Test providers that should NOT appear
   // nextoSelectors.germany_excluded_providers.forEach(({ name, expectedName }) => {
   //   const urlName = expectedName || name.toUpperCase().replace(/ /g, '_');
 
@@ -47,4 +58,3 @@ describe('Germany Providers Test', () => {
   //   });
   // });
 });
-
