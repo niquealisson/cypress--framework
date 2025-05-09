@@ -1,6 +1,6 @@
 class LoginPage {
     visit() {
-        cy.visit('https://nextocasino.com/?modal=login');
+        cy.visit('/?modal=login');
     }
 
     enterEmail(email) {
